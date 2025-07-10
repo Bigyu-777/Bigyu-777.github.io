@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄钧榆 - 深度学习工程师/算法工程师</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .name {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .job-title {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .education-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .university {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .major {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .research-item, .project-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+
+        .research-title, .project-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .journal {
+            color: #e74c3c;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .contribution, .description, .responsibility, .result {
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .skills-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .skill-items {
+            color: #7f8c8d;
+        }
+
+        .patents-list, .awards-list, .memberships-list {
+            list-style: none;
+        }
+
+        .patents-list li, .awards-list li, .memberships-list li {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .patent-type {
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        .patent-number {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .name {
+                font-size: 2.5em;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header, .sidebar, .content {
+                padding: 20px;
+            }
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .metric {
+            background: #ecf0f1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <img src="Junyu.jpg" alt="黄钧榆" class="profile-pic">
+                <h1 class="name">黄钧榆</h1>
+                <p class="job-title">深度学习工程师 / 算法工程师</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                        14706688975
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        32201800011@e.gzhu.edu.cn
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <section class="section">
+                    <h2 class="section-title">教育背景</h2>
+                    <div class="education-item">
+                        <div class="university">广州大学</div>
+                        <div class="major">遥感科学与技术 | 本科</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">专业技能</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <div class="skill-name">编程语言</div>
+                            <div class="skill-items">Python, C++</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-name">深度学习框架</div>
+                            <div class="skill-items">PyTorch, TensorFlow</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-name">计算机视觉</div>
+                            <div class="skill-items">YOLO系列模型、目标检测、图像分割、图像处理</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-name">遥感与GIS</div>
+                            <div class="skill-items">遥感图像处理、GIS数据分析、无人机数据处理</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-name">其他</div>
+                            <div class="skill-items">算法设计与优化、数据结构、Linux操作系统</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">实践与会员</h2>
+                    <ul class="memberships-list">
+                        <li>IEEE学生会员 (2025年有效)</li>
+                        <li>ISPRS学生联盟个人会员 (2024年有效)</li>
+                        <li>第136届广交会志愿服务 (累计志愿服务时长4小时)</li>
+                    </ul>
+                </section>
+            </aside>
+
+            <main class="content">
+                <section class="section">
+                    <h2 class="section-title">科研经历</h2>
+                    
+                    <div class="research-item">
+                        <h3 class="research-title">基于无人机平台的三维校园微环境空气质量监测与模拟</h3>
+                        <div class="journal">发表期刊：Appl. Sci. (2024)</div>
+                        <div class="contribution">
+                            <span class="label">主要贡献：</span>创新性地利用无人机搭载空气质量传感器，收集校园微环境三维空气质量数据，并通过<span class="highlight">BP神经网络</span>进行数据校正，构建立方体模型进行三维插值，结合摄影测量技术分析空气质量模式，为微环境空气质量监测和管理提供科学依据。
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3 class="research-title">CRE-YOLO：无人机平台高效嘉宝果树检测</h3>
+                        <div class="journal">发表期刊：IEEE Access (2024) - 第一作者</div>
+                        <div class="contribution">
+                            <span class="label">主要贡献：</span>提出<span class="highlight">CRE-YOLO模型</span>，集成了跨尺度特征融合模块（CCFM）、RepDWBlock和高效通道注意力（ECA）机制，将模型参数减少<span class="metric">54%</span>，有效降低模型复杂度的同时提高了检测精度，实现对嘉宝果树的快速准确识别，mAP@0.5达到<span class="metric">97.1%</span>，mAP@0.95达到<span class="metric">60.3%</span>，处理速度<span class="metric">387帧/秒</span>。
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3 class="research-title">EdgeYOLO-CRE轻量级网络在昇腾AI处理器上的嘉宝果树识别</h3>
+                        <div class="journal">发表期刊：Smart Agricultural Technology (2025) - 第一作者</div>
+                        <div class="contribution">
+                            <span class="label">主要贡献：</span>提出轻量级改进算法<span class="highlight">EdgeYOLO-CRE</span>，优化模型架构以减少参数并增强特征提取能力，在边缘设备上实现卓越的检测性能和推理效率，模型参数减少<span class="metric">45.65%</span>，推理速度提高<span class="metric">32.99%</span>，部署在华为Atlas 200I DK A2开发板上推理速度比YOLOv5s提高<span class="metric">14.01%</span>。
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3 class="research-title">SEFUSIONNET：基于注意力融合的多模态目标检测</h3>
+                        <div class="journal">会议邀请：2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS 2025)</div>
+                        <div class="contribution">
+                            <span class="label">主要贡献：</span>受邀在国际地球科学与遥感研讨会（IGARSS 2025）上展示关于<span class="highlight">多模态目标检测</span>的最新研究成果。
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">项目经验</h2>
+                    
+                    <div class="project-item">
+                        <h3 class="project-title">智慧农业先锋：植保无人机创新设计及其在嘉宝果园智能化农作应用</h3>
+                        <div class="description">
+                            <span class="label">项目描述：</span>该项目专注于利用植保无人机技术，结合智能化农作方法，提升嘉宝果园的种植效率和管理水平。项目涵盖无人机设计、智能作业流程规划、数据采集与分析等多个环节。
+                        </div>
+                        <div class="responsibility">
+                            <span class="label">我的职责：</span>作为项目核心成员，负责无人机路径规划算法优化、图像识别模型的开发与部署，以及智能化作业系统的集成测试。
+                        </div>
+                        <div class="result">
+                            <span class="label">成果：</span>荣获<span class="highlight">中国国际大学生创新大赛（2024）铜奖</span>。
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <h3 class="project-title">基于无人机与多传感器集成的空气质量动态监测系统研制</h3>
+                        <div class="description">
+                            <span class="label">项目描述：</span>开发一套集成了无人机和多种传感器的空气质量动态监测系统，旨在实现对特定区域空气质量的实时、立体化监测，并提供数据分析与可视化功能。
+                        </div>
+                        <div class="responsibility">
+                            <span class="label">我的职责：</span>负责传感器数据融合算法设计、无人机飞行控制与数据传输模块开发，以及空气质量数据三维可视化界面的实现。
+                        </div>
+                        <div class="result">
+                            <span class="label">成果：</span>荣获<span class="highlight">第九届中国国际"互联网+"大学生创新创业大赛广州大学校赛决赛高教主赛道铜奖</span>。
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <h3 class="project-title">植保无人机设计及其在嘉宝果园智能化作业中的应用</h3>
+                        <div class="description">
+                            <span class="label">项目描述：</span>专注于植保无人机的软硬件设计与优化，并将其应用于嘉宝果园的智能化作业，包括病虫害识别、精准喷洒等。
+                        </div>
+                        <div class="responsibility">
+                            <span class="label">我的职责：</span>负责无人机图像处理算法的开发，特别是基于深度学习的目标检测算法，以及无人机自主飞行与作业系统的集成。
+                        </div>
+                        <div class="result">
+                            <span class="label">成果：</span>荣获<span class="highlight">2023年第六届"航天宏图&华为云杯"PIE系统开发大赛三等奖（创新组）</span>。
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">专利与软著</h2>
+                    <ul class="patents-list">
+                        <li>
+                            <span class="patent-type">实用新型专利：</span>一种无线基站 - 第三发明人<br>
+                            <span class="patent-number">专利号：ZL 2023 2 2893394.5</span>
+                        </li>
+                        <li>
+                            <span class="patent-type">实用新型专利：</span>一种基于系留式无人机平台的自主表面清洁机器人 - 第四发明人<br>
+                            <span class="patent-number">专利号：ZL 2024 2 0414329.1</span>
+                        </li>
+                        <li>
+                            <span class="patent-type">发明专利：</span>基于TF坐标变换的多机器人编队跟随方法、装置及设备 - 第五发明人<br>
+                            <span class="patent-number">申请号：202410047613.4</span>
+                        </li>
+                        <li>
+                            <span class="patent-type">发明专利：</span>多无人机充电规划方法、装置、设备及介质 - 第五发明人<br>
+                            <span class="patent-number">申请号：202410787765.8</span>
+                        </li>
+                        <li>
+                            <span class="patent-type">软件著作权：</span>多功能聚合的遥感地物分割软件 V1.0<br>
+                            <span class="patent-number">登记号：2024SR2248895</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">竞赛与荣誉</h2>
+                    <ul class="awards-list">
+                        <li>中国国际大学生创新大赛（2024）铜奖</li>
+                        <li>第九届中国国际"互联网+"大学生创新创业大赛广州大学校赛决赛高教主赛道铜奖</li>
+                        <li>2023年第六届"航天宏图&华为云杯"PIE系统开发大赛三等奖（创新组）</li>
+                        <li>第十九届"挑战杯"校赛决赛三等奖</li>
+                        <li>2024年广州大学暑期"三下乡"社会实践活动暨"百千万工程"突击队行动优秀个人</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+
