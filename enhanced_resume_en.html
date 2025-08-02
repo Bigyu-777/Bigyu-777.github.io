@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junyu Huang - Deep Learning Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-accent: #eff6ff;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .profile-section {
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.02em;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            min-height: 600px;
+        }
+
+        .sidebar {
+            background: var(--bg-secondary);
+            padding: 2.5rem 2rem;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .content {
+            padding: 2.5rem 2rem;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--primary-color);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--primary-color);
+        }
+
+        /* Education */
+        .education-item {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .university {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .major {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .skill-category {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-items {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Research & Projects */
+        .research-item, .project-item {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-item::before, .project-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .research-item:hover, .project-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .research-title, .project-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .journal {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-accent);
+            border-radius: 8px;
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .journal:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .conference {
+            color: var(--success-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: #ecfdf5;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .contribution, .description, .responsibility, .result {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-right: 0.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .metric {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 0 2px;
+        }
+
+        /* Lists */
+        .patents-list, .awards-list, .memberships-list {
+            list-style: none;
+        }
+
+        .patents-list li, .awards-list li, .memberships-list li {
+            background: var(--bg-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .patents-list li:hover, .awards-list li:hover, .memberships-list li:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .patent-type {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .patent-title {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .patent-number {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .award-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .award-detail {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            
+            .container {
+                border-radius: 16px;
+            }
+            
+            .header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .name {
+                font-size: 2.5rem;
+            }
+            
+            .job-title {
+                font-size: 1.25rem;
+            }
+            
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .sidebar, .content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .research-item, .project-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .header {
+                background: var(--primary-color) !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+        }
+
+        /* Animations */
+        .section {
+            animation: slideInLeft 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Scroll animations */
+        .research-item, .project-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .research-item:nth-child(1) { animation-delay: 0.1s; }
+        .research-item:nth-child(2) { animation-delay: 0.2s; }
+        .research-item:nth-child(3) { animation-delay: 0.3s; }
+        .research-item:nth-child(4) { animation-delay: 0.4s; }
+        .research-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .project-item:nth-child(1) { animation-delay: 0.1s; }
+        .project-item:nth-child(2) { animation-delay: 0.2s; }
+        .project-item:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="profile-section">
+				<img src="Junyu.jpg" alt="Junyu Huang" class="profile-pic">
+                </div>
+                <div>
+				
+				
+                    <h1 class="name">Junyu Huang</h1>
+                    <p class="job-title">Deep Learning Engineer / Algorithm Engineer</p>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <span>14706688975</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <span>32201800011@e.gzhu.edu.cn</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <span>Guangzhou University</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github contact-icon"></i>
+                            <span>https://github.com/Bigyu-777</span> 
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-graduation-cap section-icon"></i>
+                        Education
+                    </h2>
+                    <div class="education-item">
+                        <div class="university">Guangzhou University</div>
+                        <div class="major">Remote Sensing Science and Technology | Bachelor's Degree</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-code section-icon"></i>
+                        Professional Skills
+                    </h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <div class="skill-name">
+                                <i class="fas fa-laptop-code" style="color: var(--primary-color);"></i>
+                                Programming Languages
+                            </div>
+                            <div class="skill-items">Python, C++</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-name">
+                                <i class="fas fa-brain" style="color: var(--primary-color);"></i>
+                                Deep Learning Frameworks
+                            </div>
+                            <div class="skill-items">PyTorch, TensorFlow</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-name">
+                                <i class="fas fa-eye" style="color: var(--primary-color);"></i>
+                                Computer Vision
+                            </div>
+                            <div class="skill-items">YOLO series models, Object Detection, Image Segmentation, Image Processing</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-name">
+                                <i class="fas fa-satellite" style="color: var(--primary-color);"></i>
+                                Remote Sensing & GIS
+                            </div>
+                            <div class="skill-items">Remote Sensing Image Processing, GIS Data Analysis, UAV Data Processing</div>
+                        </div>
+                        <div class="skill-category">
+                            <div class="skill-name">
+                                <i class="fas fa-tools" style="color: var(--primary-color);"></i>
+                                Others
+                            </div>
+                            <div class="skill-items">Algorithm Design & Optimization, Data Structures, Linux Operating System</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-users section-icon"></i>
+                        Activities & Membership
+                    </h2>
+                    <ul class="memberships-list">
+                        <li>IEEE Student Member</li>
+                        <li>Volunteer at the 136th Canton Fair</li>
+                    </ul>
+                </section>
+            </aside>
+
+            <main class="content">
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-microscope section-icon"></i>
+                        Research Experience
+                    </h2>
+
+                    <div class="research-item">
+                        <h3 class="research-title">Three-Dimensional Air Quality Monitoring and Simulation of Campus Microenvironment Based on UAV Platform</h3>
+                        <a href="https://www.mdpi.com/2076-3417/14/23/10908" target="_blank" class="journal">
+                            <i class="fas fa-external-link-alt"></i> Applied Sciences (2024)
+                        </a>
+                        <div class="contribution">
+                            <span class="label">Contribution:</span> Innovatively deployed UAVs with onboard air quality sensors to collect 3D micro-environmental data. Applied a <span class="highlight">BP neural network</span> for data correction, constructed a cubic model for spatial interpolation, and integrated photogrammetry to analyze air quality patterns, offering scientific support for micro-environmental monitoring and management.
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3 class="research-title">CRE-YOLO: Efficient Jaboticaba Tree Detection on UAV Platforms</h3>
+                        <a href="https://ieeexplore.ieee.org/abstract/document/10807194/" target="_blank" class="journal">
+                            <i class="fas fa-external-link-alt"></i> IEEE Access (2024) - First Author
+                        </a>
+                        <div class="contribution">
+                            <span class="label">Contribution:</span> Proposed the <span class="highlight">CRE-YOLO</span> model incorporating a cross-scale feature fusion module (CCFM), RepDWBlock, and ECA attention. Achieved a <span class="metric">54%</span> reduction in model parameters while enhancing accuracy. The model reached <span class="metric">97.1%</span> mAP@0.5 and <span class="metric">60.3%</span> mAP@0.95 for jaboticaba tree detection.
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3 class="research-title">Lightweight EdgeYOLO-CRE network for Jaboticaba tree recognition based on ascend AI processor</h3>
+                        <a href="https://www.sciencedirect.com/science/article/pii/S2772375525002242" target="_blank" class="journal">
+                            <i class="fas fa-external-link-alt"></i> Smart Agricultural Technology (2025) - First Author
+                        </a>
+                        <div class="contribution">
+                            <span class="label">Contribution:</span> Developed <span class="highlight">EdgeYOLO-CRE</span>, a lightweight model optimized for edge devices. Reduced parameters by <span class="metric">45.65%</span> and improved inference speed by <span class="metric">32.99%</span>. On Huawei Atlas 200I DK A2, the model achieved <span class="metric">14.01%</span> faster inference than YOLOv5s.
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3 class="research-title">PONet: A Compact RGB-IR Fusion Network for Vehicle Detection on OrangePi AIpro</h3>
+                        <a href="https://www.mdpi.com/2072-4292/17/15/2650" target="_blank" class="journal">
+                            <i class="fas fa-external-link-alt"></i> Remote Sensing (2025)
+                        </a>
+                        <div class="contribution">
+                            <span class="label">Contribution:</span> Proposed <span class="highlight">PONet</span> for efficient vehicle detection on embedded OrangePi AIpro platform. Fuses RGB and IR imagery with lightweight multi-scale feature extraction. Combines pruning and quantization to enable compact deployment in resource-limited environments.
+                        </div>
+                    </div>
+
+                    <div class="research-item">
+                        <h3 class="research-title">SEFusionNet: Multimodal Object Detection with Attention Fusion</h3>
+                        <div class="conference">
+                            <i class="fas fa-calendar-alt"></i> 2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS 2025)
+                        </div>
+                        <div class="contribution">
+                            <span class="label">Contribution:</span> Invited to present <span class="highlight">multimodal object detection</span> research at IGARSS 2025, showcasing an attention-based fusion framework.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-project-diagram section-icon"></i>
+                        Project Experience
+                    </h2>
+
+                    <div class="project-item">
+                        <h3 class="project-title">Smart Agriculture Pioneer: Innovative UAV Design and Its Application in Jaboticaba Orchard Management</h3>
+                        <div class="description">
+                            <span class="label">Description:</span> This project focused on integrating plant protection UAV technology with intelligent farming strategies to improve orchard productivity and management. It covered UAV design, intelligent operation workflow, data collection, and analytics.
+                        </div>
+                        <div class="responsibility">
+                            <span class="label">My Role:</span> Core team member responsible for optimizing UAV path planning algorithms, developing image recognition models, and integrating intelligent operation systems.
+                        </div>
+                        <div class="result">
+                            <span class="label">Achievement:</span> Won the <span class="highlight">Bronze Award at the 2024 China International College Students Innovation Competition</span>.
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <h3 class="project-title">Development of a Dynamic Air Quality Monitoring System Using UAVs and Multi-Sensor Integration</h3>
+                        <div class="description">
+                            <span class="label">Description:</span> Designed a real-time, 3D air quality monitoring system integrating UAVs and multiple environmental sensors, with data analysis and visualization capabilities.
+                        </div>
+                        <div class="responsibility">
+                            <span class="label">My Role:</span> Responsible for sensor data fusion algorithm design, UAV flight control and data transmission module development, and implementation of the 3D visualization interface.
+                        </div>
+                        <div class="result">
+                            <span class="label">Achievement:</span> Won the <span class="highlight">Bronze Award at the 9th China "Internet+" University Innovation and Entrepreneurship Competition (Guangzhou University Final)</span>.
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <h3 class="project-title">Design and Application of Plant Protection UAVs for Intelligent Orchard Operations</h3>
+                        <div class="description">
+                            <span class="label">Description:</span> Focused on both hardware and software design of UAVs for precision tasks in orchards, including pest detection and targeted spraying.
+                        </div>
+                        <div class="responsibility">
+                            <span class="label">My Role:</span> Developed deep learning-based object detection algorithms and integrated autonomous flight and operation systems for UAVs.
+                        </div>
+                        <div class="result">
+                            <span class="label">Achievement:</span> Won the <span class="highlight">Third Prize (Innovation Group) at the 2023 "PIE System Development Competition" hosted by PIESat & Huawei Cloud</span>.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-patent section-icon"></i>
+                        Patents & Software Copyrights
+                    </h2>
+                    <ul class="patents-list">
+                        <li>
+                            <div class="patent-type">Utility Patent</div>
+                            <div class="patent-title">A Wireless Base Station - 3rd Inventor</div>
+                            <div class="patent-number">Patent No.: ZL 2023 2 2893394.5</div>
+                        </li>
+                        <li>
+                            <div class="patent-type">Utility Patent</div>
+                            <div class="patent-title">A Tethered UAV-Based Autonomous Surface Cleaning Robot - 4th Inventor</div>
+                            <div class="patent-number">Patent No.: ZL 2024 2 0414329.1</div>
+                        </li>
+                        <li>
+                            <div class="patent-type">Invention Patent</div>
+                            <div class="patent-title">Multi-Robot Formation Following Method Based on TF Coordinate Transformation - 5th Inventor</div>
+                            <div class="patent-number">Application No.: 202410047613.4</div>
+                        </li>
+                        <li>
+                            <div class="patent-type">Invention Patent</div>
+                            <div class="patent-title">Multi-UAV Charging Scheduling Method, Device, Equipment, and Medium - 5th Inventor</div>
+                            <div class="patent-number">Application No.: 202410787765.8</div>
+                        </li>
+                        <li>
+                            <div class="patent-type">Software Copyright</div>
+                            <div class="patent-title">Integrated Remote Sensing Object Segmentation Software V1.0</div>
+                            <div class="patent-number">Registration No.: 2024SR2248895</div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-trophy section-icon"></i>
+                        Competitions & Honors
+                    </h2>
+                    <ul class="awards-list">
+                        <li>
+                            <div class="award-title">Bronze Award, 2024 China International College Students Innovation Competition</div>
+                        </li>
+                        <li>
+                            <div class="award-title">Bronze Award, 9th China "Internet+" University Innovation and Entrepreneurship Competition</div>
+                            <div class="award-detail">(Guangzhou University Final)</div>
+                        </li>
+                        <li>
+                            <div class="award-title">Third Prize (Innovation Group), 2023 "PIE System Development Competition"</div>
+                            <div class="award-detail">by PIESat & Huawei Cloud</div>
+                        </li>
+                        <li>
+                            <div class="award-title">Third Prize, 19th "Challenge Cup" Final at Guangzhou University</div>
+                        </li>
+                        <li>
+                            <div class="award-title">Outstanding Individual, 2024 Guangzhou University Summer "Three-Rural Service" Program</div>
+                            <div class="award-detail">& "Hundreds-Thousands-Tens of Thousands" Rural Revitalization Initiative</div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Add scroll animation effects
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements that need animation
+        document.querySelectorAll('.research-item, .project-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add print functionality
+        function printResume() {
+            window.print();
+        }
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                printResume();
+            }
+        });
+    </script>
+</body>
+</html>
+
