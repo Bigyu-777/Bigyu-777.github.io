@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄钧榆 - 深度学习工程师/算法工程师</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .name {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .job-title {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .education-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .university {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .major {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .research-item, .project-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+
+        .research-title, .project-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .journal {
+            color: #e74c3c;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .contribution, .description, .responsibility, .result {
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .skills-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .skill-items {
+            color: #7f8c8d;
+        }
+
+        .patents-list, .awards-list, .memberships-list {
+            list-style: none;
+        }
+
+        .patents-list li, .awards-list li, .memberships-list li {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .patent-type {
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        .patent-number {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .name {
+                font-size: 2.5em;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header, .sidebar, .content {
+                padding: 20px;
+            }
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .metric {
+            background: #ecf0f1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<header class="header">
+    <div class="header-content">
+        <img src="Junyu.jpg" alt="Junyu Huang" class="profile-pic">
+        <h1 class="name">Junyu Huang</h1>
+        <p class="job-title">Deep Learning Engineer / Algorithm Engineer</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <svg class="contact-icon" viewBox="0 0 24 24">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+                14706688975
+            </div>
+            <div class="contact-item">
+                <svg class="contact-icon" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                32201800011@e.gzhu.edu.cn
+            </div>
+        </div>
+    </div>
+</header>
+
+
+        <div class="main-content">
+<aside class="sidebar">
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <div class="university">Guangzhou University</div>
+                <div class="major">Remote Sensing Science and Technology | Bachelor's Degree</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Professional Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-name">Programming Languages</div>
+                    <div class="skill-items">Python, C++</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Deep Learning Frameworks</div>
+                    <div class="skill-items">PyTorch, TensorFlow</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Computer Vision</div>
+                    <div class="skill-items">YOLO series models, Object Detection, Image Segmentation, Image Processing</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Remote Sensing & GIS</div>
+                    <div class="skill-items">Remote Sensing Image Processing, GIS Data Analysis, UAV Data Processing</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Others</div>
+                    <div class="skill-items">Algorithm Design & Optimization, Data Structures, Linux Operating System</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Activities & Membership</h2>
+            <ul class="memberships-list">
+                <li>IEEE Student Member</li>
+                <li>Volunteer at the 136th Canton Fair</li>
+            </ul>
+        </section>
+    </aside>
+
+            <main class="content">
+                <section class="section">
+    <h2 class="section-title">Research Experience</h2>
+
+    <div class="research-item">
+        <h3 class="research-title">Three-Dimensional Air Quality Monitoring and Simulation of Campus Microenvironment Based on UAV Platform</h3>
+        <div class="journal">
+            <a href="https://www.mdpi.com/2076-3417/14/23/10908" target="_blank" style="text-decoration: none; color: inherit;">Journal: Applied Sciences (2024)</a>
+        </div>
+        <div class="contribution">
+            <span class="label">Contribution:</span> Innovatively deployed UAVs with onboard air quality sensors to collect 3D micro-environmental data. Applied a <span class="highlight">BP neural network</span> for data correction, constructed a cubic model for spatial interpolation, and integrated photogrammetry to analyze air quality patterns, offering scientific support for micro-environmental monitoring and management.
+        </div>
+    </div>
+
+    <div class="research-item">
+        <h3 class="research-title">CRE-YOLO: Efficient Jaboticaba Tree Detection on UAV Platforms</h3>
+        <div class="journal">
+            <a href="https://ieeexplore.ieee.org/abstract/document/10807194/" target="_blank" style="text-decoration: none; color: inherit;">Journal: IEEE Access (2024) - First Author</a>
+        </div>
+        <div class="contribution">
+            <span class="label">Contribution:</span> Proposed the <span class="highlight">CRE-YOLO</span> model incorporating a cross-scale feature fusion module (CCFM), RepDWBlock, and ECA attention. Achieved a <span class="metric">54%</span> reduction in model parameters while enhancing accuracy. The model reached <span class="metric">97.1%</span> mAP@0.5 and <span class="metric">60.3%</span> mAP@0.95 for jaboticaba tree detection.
+        </div>
+    </div>
+
+    <div class="research-item">
+        <h3 class="research-title">Lightweight EdgeYOLO-CRE network for Jaboticaba tree recognition based on ascend AI processor</h3>
+        <div class="journal">
+            <a href="https://www.sciencedirect.com/science/article/pii/S2772375525002242" target="_blank" style="text-decoration: none; color: inherit;">Journal: Smart Agricultural Technology (2025) - First Author</a>
+        </div>
+        <div class="contribution">
+            <span class="label">Contribution:</span> Developed <span class="highlight">EdgeYOLO-CRE</span>, a lightweight model optimized for edge devices. Reduced parameters by <span class="metric">45.65%</span> and improved inference speed by <span class="metric">32.99%</span>. On Huawei Atlas 200I DK A2, the model achieved <span class="metric">14.01%</span> faster inference than YOLOv5s.
+        </div>
+    </div>
+
+    <div class="research-item">
+        <h3 class="research-title">PONet: A Compact RGB-IR Fusion Network for Vehicle Detection on OrangePi AIpro</h3>
+        <div class="journal">
+            <a href="https://www.mdpi.com/2072-4292/17/15/2650" target="_blank" style="text-decoration: none; color: inherit;">Journal: Remote Sensing (2025)</a>
+        </div>
+        <div class="contribution">
+            <span class="label">Contribution:</span> Proposed <span class="highlight">PONet</span> for efficient vehicle detection on embedded OrangePi AIpro platform. Fuses RGB and IR imagery with lightweight multi-scale feature extraction. Combines pruning and quantization to enable compact deployment in resource-limited environments.
+        </div>
+    </div>
+
+    <div class="research-item">
+        <h3 class="research-title">SEFusionNet: Multimodal Object Detection with
+ Attention Fusion</h3>
+        <div class="journal">Conference: 2025 IEEE International Geoscience and Remote Sensing Symposium (IGARSS 2025)</div>
+        <div class="contribution">
+            <span class="label">Contribution:</span> Invited to present <span class="highlight">multimodal object detection</span> research at IGARSS 2025, showcasing an attention-based fusion framework.
+        </div>
+    </div>
+</section>
+
+
+               <section class="section">
+    <h2 class="section-title">Project Experience</h2>
+
+    <div class="project-item">
+        <h3 class="project-title">Smart Agriculture Pioneer: Innovative UAV Design and Its Application in Jaboticaba Orchard Management</h3>
+        <div class="description">
+            <span class="label">Description:</span> This project focused on integrating plant protection UAV technology with intelligent farming strategies to improve orchard productivity and management. It covered UAV design, intelligent operation workflow, data collection, and analytics.
+        </div>
+        <div class="responsibility">
+            <span class="label">My Role:</span> Core team member responsible for optimizing UAV path planning algorithms, developing image recognition models, and integrating intelligent operation systems.
+        </div>
+        <div class="result">
+            <span class="label">Achievement:</span> Won the <span class="highlight">Bronze Award at the 2024 China International College Students Innovation Competition</span>.
+        </div>
+    </div>
+
+    <div class="project-item">
+        <h3 class="project-title">Development of a Dynamic Air Quality Monitoring System Using UAVs and Multi-Sensor Integration</h3>
+        <div class="description">
+            <span class="label">Description:</span> Designed a real-time, 3D air quality monitoring system integrating UAVs and multiple environmental sensors, with data analysis and visualization capabilities.
+        </div>
+        <div class="responsibility">
+            <span class="label">My Role:</span> Responsible for sensor data fusion algorithm design, UAV flight control and data transmission module development, and implementation of the 3D visualization interface.
+        </div>
+        <div class="result">
+            <span class="label">Achievement:</span> Won the <span class="highlight">Bronze Award at the 9th China "Internet+" University Innovation and Entrepreneurship Competition (Guangzhou University Final)</span>.
+        </div>
+    </div>
+
+    <div class="project-item">
+        <h3 class="project-title">Design and Application of Plant Protection UAVs for Intelligent Orchard Operations</h3>
+        <div class="description">
+            <span class="label">Description:</span> Focused on both hardware and software design of UAVs for precision tasks in orchards, including pest detection and targeted spraying.
+        </div>
+        <div class="responsibility">
+            <span class="label">My Role:</span> Developed deep learning-based object detection algorithms and integrated autonomous flight and operation systems for UAVs.
+        </div>
+        <div class="result">
+            <span class="label">Achievement:</span> Won the <span class="highlight">Third Prize (Innovation Group) at the 2023 "PIE System Development Competition" hosted by PIESat & Huawei Cloud</span>.
+        </div>
+    </div>
+</section>
+
+               <section class="section">
+    <h2 class="section-title">Patents & Software Copyrights</h2>
+    <ul class="patents-list">
+        <li>
+            <span class="patent-type">Utility Patent:</span> A Wireless Base Station - 3rd Inventor<br>
+            <span class="patent-number">Patent No.: ZL 2023 2 2893394.5</span>
+        </li>
+        <li>
+            <span class="patent-type">Utility Patent:</span> A Tethered UAV-Based Autonomous Surface Cleaning Robot - 4th Inventor<br>
+            <span class="patent-number">Patent No.: ZL 2024 2 0414329.1</span>
+        </li>
+        <li>
+            <span class="patent-type">Invention Patent:</span> Multi-Robot Formation Following Method Based on TF Coordinate Transformation - 5th Inventor<br>
+            <span class="patent-number">Application No.: 202410047613.4</span>
+        </li>
+        <li>
+            <span class="patent-type">Invention Patent:</span> Multi-UAV Charging Scheduling Method, Device, Equipment, and Medium - 5th Inventor<br>
+            <span class="patent-number">Application No.: 202410787765.8</span>
+        </li>
+        <li>
+            <span class="patent-type">Software Copyright:</span> Integrated Remote Sensing Object Segmentation Software V1.0<br>
+            <span class="patent-number">Registration No.: 2024SR2248895</span>
+        </li>
+    </ul>
+</section>
+
+
+                <section class="section">
+    <h2 class="section-title">Competitions & Honors</h2>
+    <ul class="awards-list">
+        <li>Bronze Award, 2024 China International College Students Innovation Competition</li>
+        <li>Bronze Award, 9th China "Internet+" University Innovation and Entrepreneurship Competition (GZHU Final)</li>
+        <li>Third Prize (Innovation Group), 2023 "PIE System Development Competition" by PIESat & Huawei Cloud</li>
+        <li>Third Prize, 19th "Challenge Cup" Final at Guangzhou University</li>
+        <li>Outstanding Individual, 2024 Guangzhou University Summer “Three-Rural Service” Program & “Hundreds-Thousands-Tens of Thousands” Rural Revitalization Initiative</li>
+    </ul>
+</section>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+
